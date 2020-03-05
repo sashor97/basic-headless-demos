@@ -16,7 +16,6 @@ model:
 
     - name: isFeatured
       label: Feature this item
-      buttonLabel: wow
       type: Boolean  #Types 'Decimal', 'Long' and 'Double' are also available.
 
     - name: image

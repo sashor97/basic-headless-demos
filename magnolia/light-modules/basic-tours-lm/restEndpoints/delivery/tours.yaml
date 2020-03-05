@@ -11,3 +11,6 @@ references:
     propertyName: image
     referenceResolver:
       class: info.magnolia.rest.reference.dam.AssetReferenceResolverDefinition
+      assetRenditions:
+        - 960x720
+        - 480x360

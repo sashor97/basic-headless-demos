@@ -3,6 +3,8 @@
 <head>
   <script>
     const CONTENT_URL = 'http://localhost:8080/magnoliaAuthor/.rest/delivery/tours/?isFeatured=true'
+    const IMAGE_BASE = 'http://localhost:8080';
+
     const toursTest = [{
         "name": "Biking",
         "location": "France"
@@ -19,6 +21,7 @@
         return `<ul>
                 <li>Name: ${tour.name}</li>
                 <li>Location: ${tour.location}</li>
+                <li><img src='${IMAGE_BASE + tour.image.renditions['480x360'].link}' alt='${tour.name}' style='width:160px'/>
               </ul>`;
       }).join('');
 
