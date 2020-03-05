@@ -1,0 +1,15 @@
+!content-type-m5:tours
+name: tours
+label: Tours
+
+# Optionally override any of the app configuration supplied by the content type.
+subApps:
+  detail:
+    editor:
+      form:
+        tabs:
+          default:
+
+            fields:
+              - name: isFeatured
+                buttonLabel: Featured
