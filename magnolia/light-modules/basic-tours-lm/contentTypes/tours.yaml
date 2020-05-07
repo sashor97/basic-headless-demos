@@ -60,7 +60,3 @@ model:
       label: Body
       type: richText
       i18n: true
-
-    - name: member
-      label: Is a member
-      type: Boolean  #Types 'Decimal', 'Long' and 'Double' are also available.
