@@ -21,7 +21,7 @@
         return `<ul>
                 <li>Name: ${tour.name}</li>
                 <li>Location: ${tour.location}</li>
-                <li><img src='${IMAGE_BASE + tour.image.renditions['480x360'].link}' alt='${tour.name}' style='width:160px'/>
+                <li><img src='${IMAGE_BASE + (tour.image ? tour.image.renditions['480x360'].link : '')}' alt='${tour.name}' style='width:160px'/>
               </ul>`;
       }).join('');
 
