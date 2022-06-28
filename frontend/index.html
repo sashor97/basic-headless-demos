@@ -1,56 +1,39 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <script>
-    const CONTENT_URL = 'http://localhost:8080/magnoliaAuthor/.rest/delivery/tours/?limit=100&orderBy=mgnl:lastModified%20desc'
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+  <title>Hello, world!</title>
+</head>
+<body>
+<div class="jumbotron">
+  <h1 class="display-4">Magnolia Tours</h1>
+  <p class="lead">List of all Tours</p>
+</div>
+<div class="container">
+  <div class="card-columns tours"><!-- placeholder for results --></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.8.3/polyfill.min.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+  (function($) {
+    const ENDPOINT = "http://localhost:8080/magnoliaAuthor/.rest/delivery/tours/?limit=100&orderBy=mgnl:lastModified%20desc";
     const IMAGE_BASE = 'http://localhost:8080';
 
-    const toursTest = [{
-        "name": "Biking",
-        "location": "France"
-      },
-      {
-        "name": "Hiking",
-        "location": "Switzerland"
-      }
-    ]
-
-    function renderTours(tours) {
-
-      const markup = tours.map((tour) => {
-        return `<ul>
-                <li>Name: ${tour.name}</li>
-                <li>Location: ${tour.location}</li>
-                <li><img src='${IMAGE_BASE + (tour.image ? tour.image.renditions['480x360'].link : '')}' alt='${tour.name}' style='width:160px'/>
-              </ul>`;
-      }).join('');
-
-      return markup;
-    }
-
-    window.onload = function() {
-
-      // Example, without hitting the endpoint...
-      //document.getElementById('myContent').innerHTML = renderTours(toursTest);
-
-      fetch(CONTENT_URL)
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(myJson) {
-          const markup = renderTours(myJson.results);
-          document.getElementById('myContent').innerHTML = markup;
-        });
-
-    };
-  </script>
-</head>
-
-<body>
-  <h1>Clientside Templating</h1>
-
-  <div id="myContent">
-  </div>
+    $.get(ENDPOINT, function(data) {
+      $(".tours").append(data.results.map((item)=>`
+                  <div class="card">
+                    <img src="${IMAGE_BASE + item.image.renditions['480x360'].link}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">${item.name}</h5>
+                      <p class="card-text">${item.description}</p>
+                    </div>
+                </div>`));
+    });
+  })(jQuery);
+</script>
 </body>
-
 </html>
